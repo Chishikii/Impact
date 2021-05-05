@@ -1,18 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-public class IParticleForceRegistry : MonoBehaviour
+namespace Impact
 {
-    // Start is called before the first frame update
-    void Start()
+    public class IParticleForceRegistry
     {
-        
-    }
+        private struct IParticleForceRegistrationEntry
+        {
+            public IParticleForceRegistrationEntry(IParticle p, IParticleForceGenerator fg)
+            {
+                particle = p;
+                forceGenerator = fg;
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            public IParticle particle;
+            public IParticleForceGenerator forceGenerator;
+        }
+
+        private readonly List<IParticleForceRegistrationEntry> registry;
+
+        public void Add(IParticle p, IParticleForceGenerator fg)
+        {
+            IParticleForceRegistrationEntry registration = new IParticleForceRegistrationEntry(p, fg);
+            registry.Add(registration);
+        }
+
+        public void Remove(IParticle p, IParticleForceGenerator fg)
+        {
+            foreach (IParticleForceRegistrationEntry pfe in registry)
+            {
+                if (pfe.particle == p && pfe.forceGenerator == fg) registry.Remove(pfe);
+            }
+        }
+
+        public void Clear()
+        {
+            registry.Clear();
+        }
+
+        public void UpdateForces(double duration)
+        {
+            foreach (IParticleForceRegistrationEntry pfe in registry)
+            {
+                pfe.forceGenerator.UpdateForce(pfe.particle, duration);
+            }
+        }
     }
 }
+

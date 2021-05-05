@@ -5,6 +5,7 @@ namespace Impact
     public class IParticleWorld
     {
         public List<IParticle> particles;
+        public IParticleForceRegistry registry;
 
         public void AddParticle(IParticle p)
         {
@@ -22,6 +23,12 @@ namespace Impact
             {
                 p.Integrate(duration);
             }
+        }
+
+        public void RunPhysics(double duration)
+        {
+            registry.UpdateForces(duration);
+            Integrate(duration);
         }
     }
 }
