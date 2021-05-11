@@ -89,5 +89,10 @@ namespace Impact
         {
             x = y = z = 0;
         }
+        
+        public override string ToString()
+        {
+            return $"X:{x}, Y:{y}, Z:{z}";
+        }
     }
 }

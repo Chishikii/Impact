@@ -34,7 +34,6 @@
         /// </summary>
         public override void Step()
         {
-            UnityEngine.Debug.Log("TEst");
             particleWorld.Registry.UpdateForces();
         }
 

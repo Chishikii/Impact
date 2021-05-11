@@ -49,5 +49,10 @@ namespace Impact
                 p.Integrate(duration);
             }
         }
+
+        public override IComputationInterface GetComputationInterface()
+        {
+            return computationInterface;
+        }
     }
 }

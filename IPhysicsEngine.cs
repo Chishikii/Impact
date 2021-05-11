@@ -111,7 +111,6 @@ namespace Impact
             Dictionary<string, IPhysicsEngineModule>.ValueCollection physicsModules = modules.Values;
             foreach (IPhysicsEngineModule module in physicsModules)
             {
-                UnityEngine.Debug.Log(module.IsEnabled);
                 if (module.IsEnabled)
                 {
                     module.GetComputationInterface().Step();
