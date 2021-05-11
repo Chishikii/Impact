@@ -92,7 +92,7 @@ namespace Impact
         
         public override string ToString()
         {
-            return $"X:{x}, Y:{y}, Z:{z}";
+            return $"({x:0.##}, {y:0.##}, {z:0.##})";
         }
     }
 }

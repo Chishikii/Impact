@@ -27,15 +27,28 @@ public class Main : MonoBehaviour
         unityWorld.AddParticle(unityParticle);
 
         // Create ForceGenerator and assign to impact world registry with particle
-        iGravityForceGen = new Impact.IParticleGravity(new Impact.IVector3(0, -1, 0));
+        iGravityForceGen = new Impact.IParticleGravity(new Impact.IVector3(0, -9.82, 0));
         unityWorld.iParticleWorld.Registry.Add(unityParticle.iParticle, iGravityForceGen);
 
         // Create Engine and assign unity world to it
         unityEngine = new PhysicsEngine(unityWorld);
+
+        // Debug
+        StartCoroutine(DebugLog(10));
     }
 
     private void Update()
     {
         unityEngine.Tick(Time.deltaTime);
+    }
+
+    IEnumerator DebugLog(float waitTime)
+    {
+        while (true)
+        {
+            Debug.Log("Velocity:" + unityParticle.iParticle.Velocity);
+            Debug.Log("Position:" + unityParticle.iParticle.Position);
+            yield return new WaitForSeconds(waitTime);
+        }
     }
 }
