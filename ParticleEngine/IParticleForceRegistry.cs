@@ -18,6 +18,11 @@ namespace Impact
 
         private readonly List<IParticleForceRegistrationEntry> registry;
 
+        public IParticleForceRegistry()
+        {
+            registry = new List<IParticleForceRegistrationEntry>();
+        }
+
         public void Add(IParticle p, IParticleForceGenerator fg)
         {
             IParticleForceRegistrationEntry registration = new IParticleForceRegistrationEntry(p, fg);
@@ -37,11 +42,14 @@ namespace Impact
             registry.Clear();
         }
 
-        public void UpdateForces(double duration)
+        /// <summary>
+        /// Applies the forces on the particle supplied by the force generator for each particle.
+        /// </summary>
+        public void UpdateForces()
         {
             foreach (IParticleForceRegistrationEntry pfe in registry)
             {
-                pfe.forceGenerator.UpdateForce(pfe.particle, duration);
+                pfe.forceGenerator.UpdateForce(pfe.particle);
             }
         }
     }
