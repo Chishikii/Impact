@@ -47,6 +47,17 @@ namespace Impact
             isDead = false;
         }
 
+        public IParticle(double mass, IVector3 position)
+        {
+            this.position = position;
+            velocity = new IVector3();
+            acceleration = new IVector3();
+            forceAccum = new IVector3();
+            inverseMass = 1.0 / mass;
+            damping = 1;
+            isDead = false;
+        }
+
 
         /// <summary>
         /// Clears the accumulated force of the particle.
