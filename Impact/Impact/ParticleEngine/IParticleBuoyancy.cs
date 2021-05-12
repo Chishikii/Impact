@@ -24,7 +24,7 @@
             this.maxDepth = maxDepth;
             this.volume = volume;
             this.liquidHeight = liquidHeight;
-            liquidDensity = 1000;
+            liquidDensity = 1000.0;
             gravity = 9.81;
         }
 
@@ -42,14 +42,17 @@
             // Under water completely
             if (depth <= liquidHeight - halfMaxDepth)
             {
+                UnityEngine.Debug.LogWarning("under water");
                 force.y = verticalForce;
                 p.AddForce(force);
                 return;
             }
 
             // Partly under water
+            UnityEngine.Debug.LogWarning("partly under water");
             double distanceSubmerged = liquidHeight - depth + halfMaxDepth;
-            force.y = verticalForce * distanceSubmerged / maxDepth;
+            force.y = verticalForce * (distanceSubmerged / maxDepth);
+            
             p.AddForce(force);
         }
     }

@@ -32,7 +32,7 @@ namespace Impact
             acceleration = new IVector3();
             forceAccum = new IVector3();
             inverseMass = 0;
-            damping = 1;
+            damping = 0.9;
             isDead = false;
         }
 
@@ -43,7 +43,7 @@ namespace Impact
             acceleration = new IVector3();
             forceAccum = new IVector3();
             inverseMass = 1.0 / mass;
-            damping = 1;
+            damping = 0.3;
             isDead = false;
         }
 
@@ -86,10 +86,10 @@ namespace Impact
 
             Position.AddScaledVector(Velocity, duration);
 
-            IVector3 resulting = new IVector3(Acceleration);
-            resulting.AddScaledVector(ForceAccum, InverseMass);
+            IVector3 resultingAccel = new IVector3(Acceleration);
+            resultingAccel.AddScaledVector(ForceAccum, InverseMass);
 
-            Velocity.AddScaledVector(resulting, duration);
+            Velocity.AddScaledVector(resultingAccel, duration);
             Velocity *= Math.Pow(Damping, duration);
 
             ClearAccumulator();
