@@ -24,7 +24,8 @@ namespace Impact
         public double InverseMass { get => inverseMass; set => inverseMass = value; }
         public double Damping { get => damping; set => damping = value; }
         public bool IsDead { get => isDead; set => isDead = value; }
-
+        public bool HasFiniteMass { get { return InverseMass == 0 ? false : true; } }
+        
         public IParticle()
         {
             position = new IVector3();
