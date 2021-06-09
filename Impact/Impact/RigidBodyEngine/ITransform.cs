@@ -41,7 +41,5 @@ namespace Impact
             position.y += y;
             position.z += z;
         }
-
-        public void Rotate(IQuaternion )
     }
 }

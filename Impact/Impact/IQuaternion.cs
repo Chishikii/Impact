@@ -13,7 +13,7 @@ namespace Impact
         public double J { get => j; set => j = value; }
         public double I { get => i; set => i = value; }
         public double R { get => r; set => r = value; }
-        public readonly IQuaternion Identity{ get => new IQuaternion(1, 0, 0, 0); }
+        public IQuaternion Identity{ get => new IQuaternion(1, 0, 0, 0); }
 
         public IQuaternion()
         {
@@ -42,15 +42,15 @@ namespace Impact
             k *= d;
         }
 
-        public static bool operator *(IQuaternion q1, iQuaternion q2) =>
+        public static IQuaternion operator *(IQuaternion q1, IQuaternion q2) =>
         new IQuaternion(
-            r = q1.r * q2.r - q1.i * q2.i -
+            r : q1.r * q2.r - q1.i * q2.i -
                 q1.j * q2.j - q1.k * q2.k,
-            i = q1.r * q2.i - q1.i * q2.r +
+            i : q1.r * q2.i - q1.i * q2.r +
                 q1.j * q2.k - q1.k * q2.j,
-            j = q1.r * q2.j - q1.j * q2.k +
+            j : q1.r * q2.j - q1.j * q2.k +
                 q1.k * q2.i - q1.i * q2.r,
-            k = q1.k * q2.k - q1.k * q2.r +
+            k : q1.k * q2.k - q1.k * q2.r +
                 q1.j * q2.j - q1.j * q2.i
         );
 

@@ -94,5 +94,15 @@ namespace Impact
         {
             return $"({x:0.##}, {y:0.##}, {z:0.##})";
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
