@@ -1,6 +1,6 @@
 using System;
 
-namespace Impact
+namespace impact
 {
     class IQuaternion
     {
@@ -9,10 +9,11 @@ namespace Impact
         private double j;
         private double k;
 
-        protected double K { get => k; set => k = value; }
-        protected double J { get => j; set => j = value; }
-        protected double I { get => i; set => i = value; }
-        protected double R { get => r; set => r = value; }
+        public double K { get => k; set => k = value; }
+        public double J { get => j; set => j = value; }
+        public double I { get => i; set => i = value; }
+        public double R { get => r; set => r = value; }
+        public readonly iQuaternion identity{ get => new iQuaternion(1, 0, 0, 0); }
 
         public IQuaternion()
         {
@@ -30,27 +31,27 @@ namespace Impact
 
         public void Normalize()
         {
-            double d = (R * R) + (I * I) + (J * J) + (K * K);
+            double d = (r * r) + (i * i) + (j * j) + (k * k);
             if (d == 0) { r = 1; return; }
 
             d = ((double)1.0) / Math.Sqrt(d);
 
-            R *= d;
-            I *= d;
-            J *= d;
-            K *= d;
+            r *= d;
+            i *= d;
+            j *= d;
+            k *= d;
         }
 
-        public static bool operator *(IQuaternion q1, IQuaternion q2) =>
+        public static bool operator *(IQuaternion q1, iQuaternion q2) =>
         new IQuaternion(
-            R = q1.R * q2.R - q1.I * q2.I -
-                q1.J * q2.J - q1.K * q2.K,
-            I = q1.R * q2.I - q1.I * q2.R +
-                q1.J * q2.K - q1.K * q2.J,
-            J = q1.R * q2.J - q1.J * q2.K +
-                q1.K * q2.I - q1.I * q2.R,
-            K = q1.K * q2.K - q1.K * q2.R +
-                q1.J * q2.J - q1.J * q2.I
+            r = q1.r * q2.r - q1.i * q2.i -
+                q1.j * q2.j - q1.k * q2.k,
+            i = q1.r * q2.i - q1.i * q2.r +
+                q1.j * q2.k - q1.k * q2.j,
+            j = q1.r * q2.j - q1.j * q2.k +
+                q1.k * q2.i - q1.i * q2.r,
+            k = q1.k * q2.k - q1.k * q2.r +
+                q1.j * q2.j - q1.j * q2.i
         );
 
         public void UpdateOrientationByAngularVelocity(IVector3 angularVelocity, double time)
@@ -61,15 +62,15 @@ namespace Impact
                 angularVelocity.z * time);
             q *= this;
 
-            R += q.R * 0.5;
-            I += q.I * 0.5;
-            J += q.J * 0.5;
-            K += q.K * 0.5;
+            r += q.r * 0.5;
+            i += q.i * 0.5;
+            j += q.j * 0.5;
+            k += q.k * 0.5;
         }
 
         public override string ToString()
         {
-            return "Quaternion: " + R + "," + I + "," + J + "," + K;
+            return "Quaternion: " + r + "," + i + "," + j + "," + k;
         }
     }
 }

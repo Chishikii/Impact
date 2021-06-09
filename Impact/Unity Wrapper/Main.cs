@@ -27,7 +27,7 @@ public class Main : MonoBehaviour
         // Create particle
         particle = new Impact.IParticle(500, new Impact.IVector3(Converter.ConvertVector(particleTransform.position)));
         unityParticle = new PhysicsParticle(particleTransform, particle);
-
+        
         // Assign particle to world
         unityWorld = new ParticleWorld();
         unityWorld.AddParticle(unityParticle);
