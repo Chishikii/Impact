@@ -42,6 +42,6 @@ namespace Impact
             position.z += z;
         }
 
-
+        public void Rotate(IQuaternion )
     }
 }

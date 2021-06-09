@@ -1,6 +1,6 @@
 using System;
 
-namespace impact
+namespace Impact
 {
     class IQuaternion
     {
@@ -13,7 +13,7 @@ namespace impact
         public double J { get => j; set => j = value; }
         public double I { get => i; set => i = value; }
         public double R { get => r; set => r = value; }
-        public readonly iQuaternion identity{ get => new iQuaternion(1, 0, 0, 0); }
+        public readonly IQuaternion Identity{ get => new IQuaternion(1, 0, 0, 0); }
 
         public IQuaternion()
         {
