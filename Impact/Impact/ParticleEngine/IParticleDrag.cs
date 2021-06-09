@@ -24,6 +24,9 @@
 
         public override void UpdateForce(IParticle p)
         {
+            mediumDensity = 10;
+            if (p.Position.y <= 0) mediumDensity = 900;
+       
             IVector3 force = p.Velocity;
             double magnitude = force.Magnitude();
             if (magnitude == 0) return;
