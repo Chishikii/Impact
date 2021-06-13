@@ -1,6 +1,6 @@
 # Impact
 
-Valthume is a real time strategy game prototype. 
+Impact is a physics engine written from scratch by me.
 
 ## Current Features
 
