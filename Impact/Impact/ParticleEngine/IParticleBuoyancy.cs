@@ -30,7 +30,7 @@
 
         public override void UpdateForce(IParticle p)
         {
-            double depth = p.Position.y;
+            double depth = p.Position.Y;
             double halfMaxDepth = maxDepth / 2;
 
             // Above water
@@ -43,7 +43,7 @@
             if (depth <= liquidHeight - halfMaxDepth)
             {
                 UnityEngine.Debug.LogWarning("under water");
-                force.y = verticalForce;
+                force.Y = verticalForce;
                 p.AddForce(force);
                 return;
             }
@@ -51,7 +51,7 @@
             // Partly under water
             UnityEngine.Debug.LogWarning("partly under water");
             double distanceSubmerged = liquidHeight - depth + halfMaxDepth;
-            force.y = verticalForce * (distanceSubmerged / maxDepth);
+            force.Y = verticalForce * (distanceSubmerged / maxDepth);
             
             p.AddForce(force);
         }

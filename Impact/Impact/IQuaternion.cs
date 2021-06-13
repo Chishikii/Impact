@@ -57,9 +57,9 @@ namespace Impact
         public void UpdateOrientationByAngularVelocity(IVector3 angularVelocity, double time)
         {
             IQuaternion q = new IQuaternion(0,
-                angularVelocity.x * time,
-                angularVelocity.y * time,
-                angularVelocity.z * time);
+                angularVelocity.X * time,
+                angularVelocity.Y * time,
+                angularVelocity.Z * time);
             q *= this;
 
             r += q.r * 0.5;

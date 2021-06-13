@@ -37,9 +37,9 @@ namespace Impact
         /// </summary>
         public void Translate(double x, double y, double z)
         {
-            position.x += x;
-            position.y += y;
-            position.z += z;
+            position.X += x;
+            position.Y += y;
+            position.Z += z;
         }
     }
 }

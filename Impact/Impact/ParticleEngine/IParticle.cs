@@ -59,6 +59,16 @@ namespace Impact
             isDead = false;
         }
 
+        /// <summary>
+        /// Translates the Particle by a given vector
+        /// </summary>
+        /// <param name="translationVector">The vector used for the translation</param>
+        /// <returns>The translated particle</returns>
+        public IParticle Translate(IVector3 translationVector)
+        {
+            this.position += translationVector;
+            return this;
+        }
 
         /// <summary>
         /// Clears the accumulated force of the particle.

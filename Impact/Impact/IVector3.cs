@@ -4,58 +4,66 @@ namespace Impact
 {
     public class IVector3
     {
-        public double x;
-        public double y;
-        public double z;
+        private double x;
+        private double y;
+        private double z;
+
+        public double X { get => x; set => x = value; }
+        public double Y { get => y; set => y = value; }
+        public double Z { get => z; set => z = value; }
+        /// <summary>
+        /// Returns a vector with all components value equal 0.
+        /// </summary>
+        public static IVector3 Zero{ get => new IVector3(0, 0, 0); }
 
         public IVector3()
         {
-            x = y = z = 0;
+            X = Y = Z = 0;
         }
 
         public IVector3(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         public IVector3(IVector3 vector)
         {
-            x = vector.x;
-            y = vector.y;
-            z = vector.z;
+            X = vector.X;
+            Y = vector.Y;
+            Z = vector.Z;
         }
 
         // Operators
         public static IVector3 operator +(IVector3 v) => v;
 
         public static IVector3 operator -(IVector3 v) =>
-            new IVector3(-v.x, -v.y, -v.z);
+            new IVector3(-v.X, -v.Y, -v.Z);
 
         public static IVector3 operator +(IVector3 v1, IVector3 v2) =>
-            new IVector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+            new IVector3(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
 
         public static IVector3 operator -(IVector3 v1, IVector3 v2) =>
-            new IVector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+            new IVector3(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
 
         public static IVector3 operator *(IVector3 v1, double value) =>
-            new IVector3(v1.x * value, v1.y * value, v1.z * value);
+            new IVector3(v1.X * value, v1.Y * value, v1.Z * value);
 
         public static bool operator ==(IVector3 v1, IVector3 v2) =>
-            v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+            v1.X == v2.X && v1.Y == v2.Y && v1.Z == v2.Z;
 
         public static bool operator !=(IVector3 v1, IVector3 v2) =>
-            !(v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
+            !(v1.X == v2.X && v1.Y == v2.Y && v1.Z == v2.Z);
 
         public double Magnitude()
         {
-            return Math.Sqrt(x * x + y * y + z * z);
+            return Math.Sqrt(X * X + Y * Y + Z * Z);
         }
 
         public double SquaredMagnitude()
         {
-            return x * x + y * y + z * z;
+            return X * X + Y * Y + Z * Z;
         }
 
         public IVector3 Normalized()
@@ -69,9 +77,9 @@ namespace Impact
         public IVector3 CrossProduct(IVector3 v)
         {
             return new IVector3(
-                y * v.z - z * v.y,
-                z * v.x - x * v.z,
-                x * v.y - y * v.x);
+                Y * v.Z - Z * v.Y,
+                Z * v.X - X * v.Z,
+                X * v.Y - Y * v.X);
         }
 
         /// <summary>
@@ -79,7 +87,7 @@ namespace Impact
         /// </summary>
         public double ScalarProduct(IVector3 v)
         {
-            return x * v.x + y * v.y + z * v.z;
+            return X * v.X + Y * v.Y + Z * v.Z;
         }
 
         /// <summary>
@@ -87,9 +95,9 @@ namespace Impact
         /// </summary>
         public void AddScaledVector(IVector3 v, double s)
         {
-            x += v.x * s;
-            y += v.y * s;
-            z += v.z * s;
+            X += v.X * s;
+            Y += v.Y * s;
+            Z += v.Z * s;
         }
 
         /// <summary>
@@ -97,13 +105,13 @@ namespace Impact
         /// </summary>
         public void Clear()
         {
-            x = y = z = 0;
+            X = Y = Z = 0;
         }
 
         #region Override Methods
         public override string ToString()
         {
-            return $"({x:0.##}, {y:0.##}, {z:0.##})";
+            return $"({X:0.##}, {Y:0.##}, {Z:0.##})";
         }
 
         public override bool Equals(object obj)
@@ -124,7 +132,7 @@ namespace Impact
         /// </summary>
         public static double ScalarProduct(IVector3 v1, IVector3 v2)
         {
-            return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+            return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
         }
 
         /// <summary>
@@ -133,9 +141,9 @@ namespace Impact
         public static IVector3 CrossProduct(IVector3 v1, IVector3 v2)
         {
             return new IVector3(
-                v1.y * v2.z - v1.z * v2.y,
-                v1.z * v2.x - v1.x * v2.z,
-                v1.x * v2.y - v1.y * v2.x);
+                v1.Y * v2.Z - v1.Z * v2.Y,
+                v1.Z * v2.X - v1.X * v2.Z,
+                v1.X * v2.Y - v1.Y * v2.X);
         }
 
         /// <summary>
@@ -148,12 +156,12 @@ namespace Impact
 
         public static double Magnitude(IVector3 v)
         {
-            return Math.Sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+            return Math.Sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
         }
 
         public static double SquaredMagnitude(IVector3 v)
         {
-            return v.x * v.x + v.y * v.y + v.z * v.z;
+            return v.X * v.X + v.Y * v.Y + v.Z * v.Z;
         }
         #endregion
     }

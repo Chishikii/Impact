@@ -9,6 +9,7 @@ namespace Impact
     {
         // TODO: Write custom tuple for particles.
         private IParticle[] particles = new IParticle[2];
+        private IVector3[] particleMovement = new IVector3[2];
         private IVector3 contactNormal = new IVector3();
         private double restitution = 0;
         private double penetration = 0;
@@ -23,6 +24,7 @@ namespace Impact
             }
         }
         public IParticle[] Particles { get => particles; set => particles = value; }
+        public IVector3[] ParticleMovement { get => particleMovement; set => particleMovement = value; }
         public IVector3 ContactNormal { get => contactNormal; set => contactNormal = value; }
         public double Restitution { get => restitution; set => restitution = value; }
         public double Penetration { get => penetration; set => penetration = value; }
@@ -51,7 +53,7 @@ namespace Impact
         {
             double originalSeperatingVelocity = SeperatingVelocity();
 
-            // No movement in particles
+            // No movement in particlespp
             if (originalSeperatingVelocity > 0) return;
 
             // Both particles have infinite mass, nothing changes.
@@ -88,11 +90,20 @@ namespace Impact
 
         public void ResolveInterpenetration(double duration)
         {
-            // No penetration to resolve or immovable object
+            // No penetration to resolve or immovable object.
             if (Penetration <= 0) return;
             if (TotalInverseMass <= 0) return;
-
+            
+            // scale forces based on mass and penetration.
             IVector3 translationPerInverseMass = ContactNormal * (Penetration / TotalInverseMass);
+            particleMovement[0] = translationPerInverseMass * particles[0].InverseMass;
+            particleMovement[1] = particles[1].HasFiniteMass ?
+                translationPerInverseMass * -particles[1].InverseMass :
+                IVector3.Zero;
+
+            // apply forces created by penetration.
+            particles[0].Translate(ParticleMovement[0]);
+            particles[1].Translate(ParticleMovement[1]);
         }
 
         public double SeperatingVelocity()
