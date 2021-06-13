@@ -1,6 +1,6 @@
 # Impact
 
-Impact is a physics engine written from scratch by me.
+Impact is a physics engine written from scratch by me. ([Chishikii](https://github.com/chishikii))
 
 ## Current Features
 
